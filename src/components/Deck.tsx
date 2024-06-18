@@ -3,12 +3,7 @@ import Card from "./Card";
 import Button from "./Button";
 import { DeckIndex, Decks } from "../types";
 import { useAppContext } from "../Context";
-import arrow from "../assets/icons/arrow.svg";
-import doneCheck from "../assets/icons/doneCheck.svg";
-import closeCross from "../assets/icons/close.svg";
-import cardsIcon from "../assets/icons/cards.svg";
-import decksIcon from "../assets/icons/decks.svg";
-import emptyIcon from "../assets/icons/empty.svg";
+import { arrow, cardsIcon, closeCross, decksIcon, doneCheck, emptyIcon } from "../assets/index";
 
 interface DeckProps {
   decks: typeof Decks.prototype;

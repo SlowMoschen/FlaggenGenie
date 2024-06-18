@@ -4,7 +4,7 @@ interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
-export default function Button({ onClick, buttonSize, variant, children, disabled }: ButtonProps) {
+export default function Button({ onClick, buttonSize, variant, children, disabled, className }: ButtonProps) {
   const baseStyles = "rounded";
 
   const buttonSizes = {
@@ -35,7 +35,7 @@ export default function Button({ onClick, buttonSize, variant, children, disable
 
   const styles = `${baseStyles} ${buttonSizes[buttonSize]} ${buttonVariants[variant]} ${
     disabled ? disabledStyles : ""
-  } ${hoverStyles} hover:transform hover:-translate-y-0.5 transition-transform`;
+  } ${hoverStyles} hover:transform hover:-translate-y-0.5 transition-transform ${className}`;
 
   return (
     <button onClick={onClick} className={styles}>
