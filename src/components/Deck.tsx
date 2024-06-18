@@ -3,6 +3,12 @@ import Card from "./Card";
 import Button from "./Button";
 import { DeckIndex, Decks } from "../types";
 import { useAppContext } from "../Context";
+import arrow from "../assets/icons/arrow.svg";
+import doneCheck from "../assets/icons/doneCheck.svg";
+import closeCross from "../assets/icons/close.svg";
+import cardsIcon from "../assets/icons/cards.svg";
+import decksIcon from "../assets/icons/decks.svg";
+import emptyIcon from "../assets/icons/empty.svg";
 
 interface DeckProps {
   decks: typeof Decks.prototype;
@@ -28,25 +34,22 @@ function DeckControls({
 }: DeckControlsProps) {
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-sm">
-      <div>
-        Deck {currentDeckIndex + 1} von {totalDecks}
-      </div>
-      <div className="flex justify-between my-3 w-full">
+      <div className="flex justify-evenly my-3 w-full">
         <Button
           onClick={handlePreviousDeck}
-          buttonSize="small"
+          buttonSize="icon"
           variant="secondary"
           disabled={currentDeckIndex === 0}
         >
-          Vorheriges Deck
+          <img src={arrow} alt="previous" className="h-8 w-8" />
         </Button>
         <Button
           onClick={handleNextDeck}
-          buttonSize="small"
+          buttonSize="icon"
           variant="secondary"
           disabled={currentDeckIndex === totalDecks - 1}
         >
-          Nächstes Deck
+          <img src={arrow} alt="next" className="h-8 w-8 transform rotate-180" />
         </Button>
       </div>
     </div>
@@ -55,12 +58,12 @@ function DeckControls({
 
 function CardControls({ handleCorrect, handleIncorrect }: CardControlsProps) {
   return (
-    <div className="flex justify-between my-3 w-full max-w-sm">
-      <Button onClick={handleIncorrect} buttonSize="large" variant="game-secondary">
-        Falsch
+    <div className="flex justify-evenly my-3 w-full max-w-sm">
+      <Button onClick={handleIncorrect} buttonSize="icon" variant="game-secondary">
+        <img src={closeCross} alt="incorrect" className="h-8 w-8" />
       </Button>
-      <Button onClick={handleCorrect} buttonSize="large" variant="game-primary">
-        Richtig
+      <Button onClick={handleCorrect} buttonSize="icon" variant="game-primary">
+        <img src={doneCheck} alt="correct" className="h-8 w-8" />
       </Button>
     </div>
   );
@@ -117,19 +120,30 @@ export default function Deck({ decks }: DeckProps) {
   }, [currentDeckIndex, decks]);
 
   return (
-    <div className="h-full w-full relative flex flex-col items-center justify-center">
+    <div className="h-full w-full relative flex flex-col items-center justify-center p-2 py-10">
+      <div className="flex items-center justify-center w-full max-w-sm gap-5">
+        <div className="flex items-center justify-center mb-3 font-semibold">
+          <img src={cardsIcon} alt="cards" className="h-8 w-8 inline-block mr-2" />
+          Decks {currentDeckIndex + 1} / {decks.length}
+        </div>
+        <div className="flex items-center justify-center mb-3 font-semibold">
+          <img src={decksIcon} alt="decks" className="h-8 w-8 inline-block mr-2" />
+          {decks.getDeck(currentDeckIndex)?.length} Karten
+        </div>
+      </div>
       <DeckControls
         handleNextDeck={handleNextDeck}
         handlePreviousDeck={handlePreviousDeck}
         currentDeckIndex={currentDeckIndex}
         totalDecks={decks.length}
       />
-      <div className="card-container">
+      <div className="card-container relative h-full w-full max-w-sm bg-slate-300">
         {currentCard ? (
           <Card card={currentCard} />
         ) : (
-          <div className="flex justify-center items-center h-full w-full bg-neutral-400 rounded shadow-md text-xl text-center ">
-            Keine Karteikarten in diesem Deck
+          <div className="flex flex-col justify-center items-center gap-10 h-full w-full bg-red-200 rounded shadow-md text-xl text-center ">
+            <img src={emptyIcon} alt="empty" className="h-28 w-28" />
+            <p>Keine Karten in diesem Deck</p>
           </div>
         )}
       </div>

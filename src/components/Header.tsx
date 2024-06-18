@@ -30,7 +30,11 @@ const DotMenu = ({ isMenuOpen, onClose }: DotMenuProps) => {
   );
 };
 
-export default function Header() {
+interface HeaderProps {
+  title: string;
+}
+
+export default function Header({ title }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +51,7 @@ export default function Header() {
 
   return (
     <header className="h-16 w-full bg-slate-300 flex justify-center items-center">
-      <h1 className="text-2xl font-bold text-white">Flaggen Karteikarten</h1>
+      <h1 className="text-2xl font-bold text-white">{title}</h1>
       <button
         onClick={() => setIsMenuOpen((prev) => !prev)}
         className="absolute right-4 hover:bg-slate-400 p-2 rounded-md"

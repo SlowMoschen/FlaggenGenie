@@ -24,17 +24,16 @@ body {
 
 @layer components {
   .card-container {
-    @apply relative w-80 h-80;
     perspective: 1000px;
   }
 
   .swiper {
-    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded;
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded h-full w-full;
     user-select: none;
   }
 
   .card {
-    @apply rounded shadow-md w-96 h-80 cursor-pointer relative transform transition-transform duration-150;
+    @apply rounded shadow-md w-full h-full cursor-pointer relative transform transition-transform duration-150;
     transform-style: preserve-3d;
   }
 
@@ -45,7 +44,7 @@ body {
   }
 
   .front {
-    @apply bg-gray-300;
+    @apply bg-gray-300 select-none;
 
     img {
       @apply w-full h-full object-scale-down rounded;

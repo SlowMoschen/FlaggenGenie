@@ -18,12 +18,12 @@ const startDeck: IDeck = shuffledCountries.map((country, index) => ({
   front: country.flagSrc,
   back: country.name,
 }));
+const devDeck: IDeck = startDeck.slice(0, 5);
 
 const initialDecks: IDeck[] = [startDeck, [], [], []];
 
-
 export class Decks {
-  private decks: IDeck[] = initialDecks;
+  private decks: IDeck[] = import.meta.env.DEV ? [devDeck, [], [], []] : initialDecks;
 
   constructor(savedDecks?: IDeck[]) {
     if (savedDecks) this.decks = savedDecks;

@@ -1,14 +1,14 @@
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  buttonSize: "small" | "medium" | "large" | "icon";
+  buttonSize: "xsmall" | "small" | "medium" | "large" | "icon";
   variant: "primary" | "secondary" | "game-primary" | "game-secondary" | "icon";
   children: React.ReactNode;
 }
 
 export default function Button({ onClick, buttonSize, variant, children, disabled }: ButtonProps) {
-  const baseStyles =
-    "rounded";
+  const baseStyles = "rounded";
 
   const buttonSizes = {
+    xsmall: "py-1 px-2 text-xs",
     small: "py-1 px-4 text-sm",
     medium: "py-2 px-6 text-base",
     large: "py-3 px-8 text-lg",
@@ -23,11 +23,19 @@ export default function Button({ onClick, buttonSize, variant, children, disable
     icon: "bg-transparent text-gray-800",
   };
 
+  const hoverStyles = {
+    primary: "hover:bg-blue-600",
+    secondary: "hover:bg-gray-400",
+    "game-primary": "hover:bg-green-600",
+    "game-secondary": "hover:bg-red-600",
+    icon: "hover:bg-gray-400",
+  }[variant];
+
   const disabledStyles = "opacity-50 cursor-default";
 
   const styles = `${baseStyles} ${buttonSizes[buttonSize]} ${buttonVariants[variant]} ${
     disabled ? disabledStyles : ""
-  }`;
+  } ${hoverStyles} hover:transform hover:-translate-y-0.5 transition-transform`;
 
   return (
     <button onClick={onClick} className={styles}>

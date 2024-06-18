@@ -31,7 +31,7 @@ const Card = forwardRef<HTMLDivElement, ICardProps>(({ card }, ref) => {
       <div className="swiper" ref={ref}>
         <div className="card" onClick={(e) => handleClick(e)} ref={cardRef}>
           <div className="front">
-            <img src={frontDisplay} alt="front" />
+            <img src={frontDisplay} alt="front" draggable={false}/>
           </div>
           <div className="back">{backDisplay}</div>
         </div>

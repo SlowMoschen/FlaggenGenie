@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header title="Karteikarten" />
       <Deck decks={decks} />
     </>
   );
