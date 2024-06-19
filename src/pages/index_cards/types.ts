@@ -1,4 +1,4 @@
-import { countries } from "./Countries";
+import { countries } from "../../Countries";
 
 export interface ICard {
   id: number;

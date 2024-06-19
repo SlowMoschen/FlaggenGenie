@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-import { closeCross } from "../assets";
+import { closeCross } from "../../assets";
 import { useEffect, useRef } from "react";
 import Button from "./Button";
 

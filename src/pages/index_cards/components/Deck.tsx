@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Card from "./Card";
-import Button from "./Button";
 import { DeckIndex, Decks } from "../types";
-import { useAppContext } from "../Context";
-import { arrow, cardsIcon, closeCross, decksIcon, doneCheck, emptyIcon } from "../assets/index";
+import Button from "../../../shared/components/Button";
+import { arrow, cardsIcon, closeCross, decksIcon, doneCheck, emptyIcon } from "../../../assets";
+import Card from "./Card";
+import { useIndexCardContext } from "../IndexCardsContext";
 
 interface DeckProps {
   decks: typeof Decks.prototype;
@@ -65,7 +65,7 @@ function CardControls({ handleCorrect, handleIncorrect }: CardControlsProps) {
 }
 
 export default function Deck({ decks }: DeckProps) {
-  const { saveUserState } = useAppContext();
+  const { saveUserState } = useIndexCardContext();
   const [currentDeckIndex, setCurrentDeckIndex] = useState<DeckIndex>(0);
   const [currentCard, setCurrentCard] = useState(decks.getDeck(currentDeckIndex)?.[0]);
 

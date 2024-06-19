@@ -16,9 +16,9 @@ const INITIAL_USER_STATE: IUserState = {
   decks: new Decks(),
 };
 
-const AppContext = createContext<IAppContext | null>(null);
+const IndexCardContext = createContext<IAppContext | null>(null);
 
-const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
+const IndexCardContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [name, setName] = useState(INITIAL_USER_STATE.name);
   const [decks, setDecks] = useState(INITIAL_USER_STATE.decks);
 
@@ -46,17 +46,17 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ name, decks, setName, saveUserState, resetUserState }}>
+    <IndexCardContext.Provider value={{ name, decks, setName, saveUserState, resetUserState }}>
       {children}
-    </AppContext.Provider>
+    </IndexCardContext.Provider>
   );
 };
 
-const useAppContext = () => {
-  const context = useContext(AppContext);
+const useIndexCardContext = () => {
+  const context = useContext(IndexCardContext);
   if (!context) throw new Error("useAppContext must be used within an AppContextProvider");
   return context;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export { AppContext, AppContextProvider, useAppContext };
+export { IndexCardContext, IndexCardContextProvider, useIndexCardContext };
