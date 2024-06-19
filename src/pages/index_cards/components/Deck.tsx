@@ -65,7 +65,7 @@ function CardControls({ handleCorrect, handleIncorrect }: CardControlsProps) {
 }
 
 export default function Deck({ decks }: DeckProps) {
-  const { saveUserState } = useIndexCardContext();
+  const { saveUserState, updateStats } = useIndexCardContext();
   const [currentDeckIndex, setCurrentDeckIndex] = useState<DeckIndex>(0);
   const [currentCard, setCurrentCard] = useState(decks.getDeck(currentDeckIndex)?.[0]);
 
@@ -82,6 +82,7 @@ export default function Deck({ decks }: DeckProps) {
       decks.getDeck((currentDeckIndex + 1) as DeckIndex)?.push(removedCard);
     }
     setCurrentCard(decks.getDeck(currentDeckIndex)?.[0]);
+    updateStats(true);
     saveUserState();
   };
 
@@ -95,6 +96,7 @@ export default function Deck({ decks }: DeckProps) {
       decks.getDeck((currentDeckIndex - 1) as DeckIndex)?.push(removedCard);
     }
     setCurrentCard(decks.getDeck(currentDeckIndex)?.[0]);
+    updateStats(false);
     saveUserState();
   };
 

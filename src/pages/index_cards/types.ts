@@ -47,6 +47,14 @@ export class Decks {
 }
 
 export interface IUserState {
-  name: string;
   decks: typeof Decks.prototype;
+  stats: {
+    correct: number;
+    incorrect: number;
+    total: number;
+    correctStreak: number;
+    maxCorrectStreak: number;
+    correctPercentage: number;
+    incorrectPercentage: number;
+  };
 }

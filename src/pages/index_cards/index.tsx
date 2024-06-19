@@ -12,7 +12,7 @@ function IndexCards() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
-    }, 800);
+    }, 300);
   }, []);
 
   if (!isLoaded) {

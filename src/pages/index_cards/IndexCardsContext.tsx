@@ -2,41 +2,70 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { Decks, IUserState } from "./types.ts";
 
 interface IAppContext {
-  name: string;
   decks: typeof Decks.prototype;
-  setName: (name: string) => void;
+  stats: IUserState["stats"];
   saveUserState: () => void;
   resetUserState: () => void;
+  updateStats: (correct: boolean) => void;
 }
 
 const USER_STATE_KEY = "flashcards-user-state";
 
 const INITIAL_USER_STATE: IUserState = {
-  name: "Guest",
   decks: new Decks(),
+  stats: {
+    correct: 0,
+    incorrect: 0,
+    total: 0,
+    correctStreak: 0,
+    maxCorrectStreak: 0,
+    correctPercentage: 0,
+    incorrectPercentage: 0,
+  },
 };
 
 const IndexCardContext = createContext<IAppContext | null>(null);
 
 const IndexCardContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [name, setName] = useState(INITIAL_USER_STATE.name);
   const [decks, setDecks] = useState(INITIAL_USER_STATE.decks);
+  const [stats, setStats] = useState(INITIAL_USER_STATE.stats);
+
+  const updateStats = (correct: boolean) => {
+    const updatedStats = { ...stats };
+    updatedStats.total += 1;
+    if (correct) {
+      updatedStats.correct += 1;
+      updatedStats.correctStreak += 1;
+      if (updatedStats.correctStreak > updatedStats.maxCorrectStreak)
+        updatedStats.maxCorrectStreak = updatedStats.correctStreak;
+      updatedStats.correctPercentage = Math.round(
+        (updatedStats.correct / updatedStats.total) * 100
+      );
+    } else {
+      updatedStats.incorrect += 1;
+      updatedStats.correctStreak = 0;
+      updatedStats.incorrectPercentage = Math.round(
+        (updatedStats.incorrect / updatedStats.total) * 100
+      );
+    }
+    setStats(updatedStats);
+  };
 
   const saveUserState = () =>
-    localStorage.setItem(USER_STATE_KEY, JSON.stringify({ name, decks: decks.allDecks }));
+    localStorage.setItem(USER_STATE_KEY, JSON.stringify({ decks: decks.allDecks, stats }));
 
   const loadUserState = () => {
     const userState = localStorage.getItem(USER_STATE_KEY);
     if (!userState) return console.warn("No user state found in local storage");
 
     const parsedUserState = JSON.parse(userState);
-    setName(parsedUserState.name);
     setDecks(new Decks(parsedUserState.decks));
+    setStats(parsedUserState.stats);
   };
 
   const resetUserState = () => {
-    setName(INITIAL_USER_STATE.name);
     setDecks(new Decks());
+    setStats(INITIAL_USER_STATE.stats);
     localStorage.removeItem(USER_STATE_KEY);
     window.location.reload();
   };
@@ -46,7 +75,7 @@ const IndexCardContextProvider = ({ children }: { children: React.ReactNode }) =
   }, []);
 
   return (
-    <IndexCardContext.Provider value={{ name, decks, setName, saveUserState, resetUserState }}>
+    <IndexCardContext.Provider value={{ decks, stats, saveUserState, resetUserState, updateStats }}>
       {children}
     </IndexCardContext.Provider>
   );

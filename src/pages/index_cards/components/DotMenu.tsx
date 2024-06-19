@@ -33,6 +33,36 @@ const HelpDialog = () => (
   </div>
 );
 
+const StatsDialog = () => {
+  const { stats } = useIndexCardContext();
+
+  return (
+    <div className="py-5">
+      <h3 className="text-3xl font-bold text-center">Statistik</h3>
+      <div className="grid grid-cols-2 gap-5 mt-5 px-3">
+        <div className="font-bold flex flex-col gap-2">
+          <p>Korrekt:</p>
+          <p>Falsch:</p>
+          <p>Gesamt:</p>
+          <p>Korrekte Serie:</p>
+          <p>Max. korrekte Serie:</p>
+          <p>Korrekt %:</p>
+          <p>Falsch %:</p>
+        </div>
+        <div className="flex flex-col gap-2 items-end">
+          <p>{stats.correct}</p>
+          <p>{stats.incorrect}</p>
+          <p>{stats.total}</p>
+          <p>{stats.correctStreak}</p>
+          <p>{stats.maxCorrectStreak}</p>
+          <p>{stats.correctPercentage}%</p>
+          <p>{stats.incorrectPercentage}%</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function IndexCardsDotMenu() {
   const { resetUserState } = useIndexCardContext();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -49,6 +79,11 @@ export default function IndexCardsDotMenu() {
     setIsDialogOpen(true);
   };
 
+  const handleStats = () => {
+    setDialogContent(<StatsDialog />);
+    setIsDialogOpen(true);
+  };
+
   return (
     <div className={`dot-menu flex flex-col absolute z-50 top-16 right-3 bg-slate-300 p-2 rounded`}>
       <Dialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
@@ -56,6 +91,9 @@ export default function IndexCardsDotMenu() {
       </Dialog>
       <button onClick={handleReset} className="hover:bg-slate-400 p-2 rounded-md">
         Zurücksetzen
+      </button>
+      <button onClick={handleStats} className="hover:bg-slate-400 p-2 rounded-md">
+        Statistik
       </button>
       <button onClick={handleHelp} className="hover:bg-slate-400 p-2 rounded-md">
         Hilfe
