@@ -1026,7 +1026,7 @@ export const countries: Country[] = [
         flagSrc: "/flags/sy.svg",
     },
     {
-        name: "Swasiland",
+        name: "Eswatini",
         abbreviation: "sz",
         flagSrc: "/flags/sz.svg",
     },
