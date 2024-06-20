@@ -1,5 +1,5 @@
-import { useState } from "react";
 import Dialog from "../../../shared/components/Dialog";
+import { useDialogContext } from "../../../shared/context/DialogContext";
 import { useIndexCardContext } from "../IndexCardsContext";
 
 const HelpDialog = () => (
@@ -65,8 +65,7 @@ const StatsDialog = () => {
 
 export default function IndexCardsDotMenu() {
   const { resetUserState } = useIndexCardContext();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [dialogContent, setDialogContent] = useState<React.ReactNode>(null);
+  const { isDialogOpen, openDialog, dialogContent, closeDialog } = useDialogContext();
 
   const handleReset = () => {
     if (window.confirm("Bist du sicher, dass du alle Daten zurücksetzen möchtest?")) {
@@ -74,28 +73,18 @@ export default function IndexCardsDotMenu() {
     }
   };
 
-  const handleHelp = () => {
-    setDialogContent(<HelpDialog />);
-    setIsDialogOpen(true);
-  };
-
-  const handleStats = () => {
-    setDialogContent(<StatsDialog />);
-    setIsDialogOpen(true);
-  };
-
   return (
     <div className={`dot-menu flex flex-col absolute z-50 top-16 right-3 bg-slate-300 p-2 rounded`}>
-      <Dialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
+      <Dialog isOpen={isDialogOpen} onClose={() => closeDialog()}>
         {dialogContent}
       </Dialog>
       <button onClick={handleReset} className="hover:bg-slate-400 p-2 rounded-md">
         Zurücksetzen
       </button>
-      <button onClick={handleStats} className="hover:bg-slate-400 p-2 rounded-md">
+      <button onClick={() => openDialog(<StatsDialog/>)} className="hover:bg-slate-400 p-2 rounded-md">
         Statistik
       </button>
-      <button onClick={handleHelp} className="hover:bg-slate-400 p-2 rounded-md">
+      <button onClick={() => openDialog(<HelpDialog/>)} className="hover:bg-slate-400 p-2 rounded-md">
         Hilfe
       </button>
     </div>

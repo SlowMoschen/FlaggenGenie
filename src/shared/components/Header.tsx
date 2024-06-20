@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import dots from "../../assets/icons/three-dots.svg";
 import { arrow } from "../../assets";
 import { useNavigate } from "react-router-dom";
+import { useDialogContext } from "../context/DialogContext";
 
 interface HeaderProps {
   title: string;
@@ -13,17 +14,20 @@ export default function Header({ title, dotMenu, redirectHome }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const redirect = useNavigate();
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      setIsMenuOpen(false);
-    }
-  };
+  const { isDialogOpen } = useDialogContext();
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isDialogOpen) return;
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mouseup", handleClickOutside);
+    
+    return () => document.removeEventListener("mouseup", handleClickOutside);
+  }, [isDialogOpen]);
 
   return (
     <>

@@ -14,19 +14,22 @@ export default function Dialog({ isOpen, onClose, children }: DialogProps) {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      event.stopPropagation();
       if (contentRef.current && !contentRef.current.contains(event.target as Node)) {
         onClose();
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mouseup", handleClickOutside);
 
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mouseup", handleClickOutside);
   }, [onClose]);
 
+  if (!isOpen) return null;
+
   return createPortal(
-    isOpen ? (
-      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-50 p-2">
+    (
+      <div className="dialog fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-50 p-2">
         <div
           className="bg-white p-4 rounded-lg relative w-full max-w-sm max-h-[80%] overflow-y-auto"
           ref={contentRef}
@@ -45,7 +48,7 @@ export default function Dialog({ isOpen, onClose, children }: DialogProps) {
           </Button>
         </div>
       </div>
-    ) : null,
+    ),
     window.document.body
   );
 }
