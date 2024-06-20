@@ -1,0 +1,31 @@
+{
+  "header": "Karteikarten",
+  "cards": "Karten",
+  "dotMenu": {
+    "reset": "Zurücksetzen",
+    "stats": "Statistiken",
+    "help": "Hilfe"
+  },
+  "stats": {
+    "header": "Statistiken",
+    "total": "Gesamt",
+    "correct": "Korrekt",
+    "wrong": "Falsch",
+    "correctPercent": "Korrekt %",
+    "wrongPercent": "Falsch %",
+    "correctStreak": "Korrekte Serie",
+    "correctStreakBest": "Max. korrekte Serie"
+  },
+  "help": {
+    "why": "Warum Karteikarten?",
+    "whyContent": "Karteikarten sind ein effektives Mittel, um Wissen zu lernen und zu wiederholen. Die Karteikarten ermöglichen es dir einfach die Flaggen der Welt zu lernen.",
+    "how": "Wie funktioniert es?",
+    "howContent": {
+      "cardClick": "Klicke auf eine Karte, um die Antwort zu sehen.",
+      "goNext": "Klicke auf das 'X' solltest du die Karteikarte nicht kennen. Klicke auf das 'Häkchen', wenn du die Karteikarte kennst.",
+      "cardMove": "Richtige Karteikarten werden in das nächste Deck verschoben und falsche in das vorherige Deck.",
+      "reset": "Du kannst jederzeit auf 'Zurücksetzen' klicken, um alle Daten zurückzusetzen."
+    }
+  },
+  "resetConfirm": "Möchtest du wirklich alle Daten zurücksetzen? Du kannst diese Aktion nicht rückgängig machen."
+}

@@ -4,6 +4,7 @@ import Button from "../../../shared/components/Button";
 import { arrow, cardsIcon, closeCross, decksIcon, doneCheck, emptyIcon } from "../../../assets";
 import Card from "./Card";
 import { useIndexCardContext } from "../IndexCardsContext";
+import { useTranslation } from "react-i18next";
 
 interface DeckProps {
   decks: typeof Decks.prototype;
@@ -68,6 +69,7 @@ export default function Deck({ decks }: DeckProps) {
   const { saveUserState, updateStats } = useIndexCardContext();
   const [currentDeckIndex, setCurrentDeckIndex] = useState<DeckIndex>(0);
   const [currentCard, setCurrentCard] = useState(decks.getDeck(currentDeckIndex)?.[0]);
+  const { t } = useTranslation("indexCards");
 
   const isLastDeck = currentDeckIndex === decks.length - 1;
   const isFirstDeck = currentDeckIndex === 0;
@@ -125,7 +127,7 @@ export default function Deck({ decks }: DeckProps) {
         </div>
         <div className="flex items-center justify-center mb-3 font-semibold">
           <img src={decksIcon} alt="decks" className="h-8 w-8 inline-block mr-2" />
-          {decks.getDeck(currentDeckIndex)?.length} Karten
+          {decks.getDeck(currentDeckIndex)?.length} {t("cards")}
         </div>
       </div>
       <DeckControls

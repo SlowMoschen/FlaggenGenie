@@ -1,53 +1,54 @@
+import { useTranslation } from "react-i18next";
 import Dialog from "../../../shared/components/Dialog";
 import { useDialogContext } from "../../../shared/context/DialogContext";
 import { useIndexCardContext } from "../IndexCardsContext";
 
-const HelpDialog = () => (
-  <div className="py-5">
-    <div>
-      <h3 className="text-2xl font-semibold text-center">Warum Karteikarten ?</h3>
-      <p className="mt-5">
-        Karteikarten sind ein effektives Mittel, um Wissen zu lernen und zu wiederholen. Die
-        Karteikarten ermöglichen es dir einfach die Flaggen der Welt zu lernen.
-      </p>
-    </div>
-    <div>
-      <h3 className="text-2xl font-semibold text-center mt-5">Wie funktioniert es ?</h3>
-      <p className="mt-5">
-        <span className="underline">Klicke auf die Karteikarte</span>, um die Antwort anzuzeigen.
-      </p>
-      <p className="mt-5">
-        Klicke auf das <span className="font-bold">"X"</span> solltest du die Karteikarte nicht
-        kennen. Klicke auf das <span className="font-bold">"Häkchen"</span>, wenn du die Karteikarte
-        kennst.
-      </p>
-      <p className="mt-5">
-        Richtige Karteikarten werden in das <span className="underline">nächste</span> Deck
-        verschoben und falsche in das <span className="underline">vorherige</span> Deck.
-      </p>
-      <p className="mt-5">
-        Du kannst jederzeit auf <span className="font-bold">"Zurücksetzen"</span> klicken, um alle
-        Daten zurückzusetzen.
-      </p>
-    </div>
-  </div>
-);
-
-const StatsDialog = () => {
-  const { stats } = useIndexCardContext();
+const HelpDialog = () => {
+  const { t } = useTranslation("indexCards");
 
   return (
     <div className="py-5">
-      <h3 className="text-3xl font-bold text-center">Statistik</h3>
+      <div>
+        <h3 className="text-2xl font-semibold text-center">{t('help.why')}</h3>
+        <p className="mt-5">
+          {t('help.whyContent')}
+        </p>
+      </div>
+      <div>
+        <h3 className="text-2xl font-semibold text-center mt-5">Wie funktioniert es ?</h3>
+        <p className="mt-5">
+          {t('help.howContent.cardClick')}
+        </p>
+        <p className="mt-5">
+          {t('help.howContent.goNext')}
+        </p>
+        <p className="mt-5">
+          {t('help.howContent.cardMove')}
+        </p>
+        <p className="mt-5">
+          {t('help.howContent.reset')}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+const StatsDialog = () => {
+  const { stats } = useIndexCardContext();
+  const { t } = useTranslation("indexCards");
+
+  return (
+    <div className="py-5">
+      <h3 className="text-3xl font-bold text-center">{t('stats.header')}</h3>
       <div className="grid grid-cols-2 gap-5 mt-5 px-3">
         <div className="font-bold flex flex-col gap-2">
-          <p>Korrekt:</p>
-          <p>Falsch:</p>
-          <p>Gesamt:</p>
-          <p>Korrekte Serie:</p>
-          <p>Max. korrekte Serie:</p>
-          <p>Korrekt %:</p>
-          <p>Falsch %:</p>
+          <p>{t("stats.correct")}</p>
+          <p>{t("stats.wrong")}</p>
+          <p>{t("stats.total")}</p>
+          <p>{t("stats.correctStreak")}</p>
+          <p>{t("stats.correctStreakBest")}</p>
+          <p>{t("stats.correctPercent")}</p>
+          <p>{t("stats.wrongPercent")}</p>
         </div>
         <div className="flex flex-col gap-2 items-end">
           <p>{stats.correct}</p>
@@ -66,9 +67,10 @@ const StatsDialog = () => {
 export default function IndexCardsDotMenu() {
   const { resetUserState } = useIndexCardContext();
   const { isDialogOpen, openDialog, dialogContent, closeDialog } = useDialogContext();
+  const { t } = useTranslation("indexCards");
 
   const handleReset = () => {
-    if (window.confirm("Bist du sicher, dass du alle Daten zurücksetzen möchtest?")) {
+    if (window.confirm(t("resetConfirm"))) {
       resetUserState();
     }
   };
@@ -79,13 +81,13 @@ export default function IndexCardsDotMenu() {
         {dialogContent}
       </Dialog>
       <button onClick={handleReset} className="hover:bg-slate-400 p-2 rounded-md">
-        Zurücksetzen
+        {t("dotMenu.reset")}
       </button>
       <button onClick={() => openDialog(<StatsDialog/>)} className="hover:bg-slate-400 p-2 rounded-md">
-        Statistik
+        {t("dotMenu.stats")}
       </button>
       <button onClick={() => openDialog(<HelpDialog/>)} className="hover:bg-slate-400 p-2 rounded-md">
-        Hilfe
+        {t("dotMenu.help")}
       </button>
     </div>
   );
