@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import Dialog from "../../../shared/components/Dialog";
 import { useDialogContext } from "../../../shared/context/DialogContext";
 import { useIndexCardContext } from "../IndexCardsContext";
+import Button from "../../../shared/components/Button";
 
 const HelpDialog = () => {
   const { t } = useTranslation("indexCards");
@@ -76,19 +77,19 @@ export default function IndexCardsDotMenu() {
   };
 
   return (
-    <div className={`dot-menu flex flex-col absolute z-50 top-16 right-3 bg-slate-300 p-2 rounded`}>
+    <div className={`dot-menu flex flex-col gap-2 p-3 absolute z-50 top-16 right-3 bg-background-800 rounded`}>
       <Dialog isOpen={isDialogOpen} onClose={() => closeDialog()}>
         {dialogContent}
       </Dialog>
-      <button onClick={handleReset} className="hover:bg-slate-400 p-2 rounded-md">
+      <Button onClick={handleReset} buttonSize="medium" variant="secondary">
         {t("dotMenu.reset")}
-      </button>
-      <button onClick={() => openDialog(<StatsDialog/>)} className="hover:bg-slate-400 p-2 rounded-md">
+      </Button>
+      <Button onClick={() => openDialog(<StatsDialog/>)} buttonSize="medium" variant="secondary">
         {t("dotMenu.stats")}
-      </button>
-      <button onClick={() => openDialog(<HelpDialog/>)} className="hover:bg-slate-400 p-2 rounded-md">
+      </Button>
+      <Button onClick={() => openDialog(<HelpDialog/>)} buttonSize="medium" variant="secondary">
         {t("dotMenu.help")}
-      </button>
+      </Button>
     </div>
   );
 }

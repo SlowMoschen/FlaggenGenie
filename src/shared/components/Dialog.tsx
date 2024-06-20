@@ -29,16 +29,16 @@ export default function Dialog({ isOpen, onClose, children }: DialogProps) {
 
   return createPortal(
     (
-      <div className="dialog fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-50 p-2">
+      <div className="dialog fixed inset-0 z-[100] flex items-center justify-center bg-background-50 bg-opacity-30 p-2">
         <div
-          className="bg-white p-4 rounded-lg relative w-full max-w-sm max-h-[80%] overflow-y-auto"
+          className="bg-background-950 p-4 rounded-lg relative w-full max-w-sm min-h-[50%] max-h-[80%] overflow-y-auto border-8 border-primary-500"
           ref={contentRef}
         >
           <Button
             onClick={onClose}
             className="absolute top-2 right-2 h-8 w-8 flex items-center justify-center"
             variant="secondary"
-            buttonSize="icon"
+            buttonSize="xsmall"
           >
             <img src={closeCross} alt="close" className="h-6 w-6" />
           </Button>

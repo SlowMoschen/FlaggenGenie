@@ -1,5 +1,5 @@
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  buttonSize: "xsmall" | "small" | "medium" | "large" | "icon";
+  buttonSize: "xsmall" | "small" | "medium" | "large";
   variant: "primary" | "secondary" | "game-primary" | "game-secondary" | "icon";
   children: React.ReactNode;
 }
@@ -12,24 +12,23 @@ export default function Button({ onClick, buttonSize, variant, children, disable
     small: "py-1 px-4 text-sm",
     medium: "py-2 px-6 text-base",
     large: "py-3 px-8 text-lg",
-    icon: "p-2 rounded-full",
   };
 
   const buttonVariants = {
-    primary: "bg-blue-500 text-white",
-    secondary: "bg-gray-300 text-gray-800",
-    "game-primary": "bg-green-500 text-white",
-    "game-secondary": "bg-red-500 text-white",
-    icon: "bg-transparent text-gray-800",
+    primary: "bg-primary-500 font-bold tracking-wider",
+    secondary: "bg-secondary-700 font-semibold tracking-wider",
+    "game-primary": "bg-green-500 font-bold",
+    "game-secondary": "bg-red-500 font-bold",
+    icon: "bg-transparent text-secondary-800 font-bold",
   };
 
   const hoverStyles = {
-    primary: "hover:bg-blue-600",
-    secondary: "hover:bg-gray-400",
+    primary: "hover:bg-primary-600",
+    secondary: "hover:bg-secondary-400",
     "game-primary": "hover:bg-green-600",
     "game-secondary": "hover:bg-red-600",
-    icon: "hover:bg-gray-400",
-  }[variant];
+    icon: "hover:bg-secondary-400",
+  }
 
   const disabledStyles = "opacity-50 cursor-default";
 

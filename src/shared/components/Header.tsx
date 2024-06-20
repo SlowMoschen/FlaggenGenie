@@ -32,11 +32,11 @@ export default function Header({ title, dotMenu, redirectHome }: HeaderProps) {
 
   return (
     <>
-      <header className="h-16 w-full bg-slate-300 flex justify-center items-center">
+      <header className="h-16 w-full bg-background-500 flex justify-center items-center">
         {redirectHome && (
           <button
             onClick={() => redirect(REDIRECTS.HOME)}
-            className="absolute left-4 hover:bg-slate-400 p-2 rounded-md"
+            className="absolute left-4 hover:bg-text-600 p-2 rounded-md"
           >
             <img src={arrow} alt="home" className="h-6 w-6" />
           </button>
@@ -46,7 +46,7 @@ export default function Header({ title, dotMenu, redirectHome }: HeaderProps) {
           <>
             <button
               onClick={() => setIsMenuOpen((prev) => !prev)}
-              className="absolute right-4 hover:bg-slate-400 p-2 rounded-md"
+              className="absolute right-4 hover:bg-text-600 p-2 rounded-md"
             >
               <img src={dots} alt="menu" className="h-6 w-6" />
             </button>

@@ -33,7 +33,7 @@ function DeckControls({
       <div className="flex justify-evenly my-3 w-full">
         <Button
           onClick={handlePreviousDeck}
-          buttonSize="icon"
+          buttonSize="xsmall"
           variant="secondary"
           disabled={currentDeckIndex === 0}
         >
@@ -41,7 +41,7 @@ function DeckControls({
         </Button>
         <Button
           onClick={handleNextDeck}
-          buttonSize="icon"
+          buttonSize="xsmall"
           variant="secondary"
           disabled={currentDeckIndex === totalDecks - 1}
         >
@@ -55,10 +55,10 @@ function DeckControls({
 function CardControls({ handleCorrect, handleIncorrect }: CardControlsProps) {
   return (
     <div className="flex justify-evenly my-3 w-full max-w-sm">
-      <Button onClick={handleIncorrect} buttonSize="icon" variant="game-secondary">
+      <Button onClick={handleIncorrect} buttonSize="medium" variant="game-secondary">
         <img src={closeCross} alt="incorrect" className="h-8 w-8" />
       </Button>
-      <Button onClick={handleCorrect} buttonSize="icon" variant="game-primary">
+      <Button onClick={handleCorrect} buttonSize="medium" variant="game-primary">
         <img src={doneCheck} alt="correct" className="h-8 w-8" />
       </Button>
     </div>

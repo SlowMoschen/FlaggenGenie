@@ -10,7 +10,7 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   height: 100vh;
 }
 
@@ -23,6 +23,10 @@ body {
 }
 
 @layer components {
+  body {
+    @apply bg-primary-900 text-text-50;
+  }
+
   .card-container {
     perspective: 1000px;
   }
@@ -44,7 +48,7 @@ body {
   }
 
   .front {
-    @apply bg-gray-300 select-none;
+    @apply bg-primary-800 select-none;
 
     img {
       @apply w-full h-full object-scale-down rounded;
@@ -52,7 +56,7 @@ body {
   }
 
   .back {
-    @apply bg-blue-300 text-4xl text-center;
+    @apply bg-primary-600 text-4xl text-center;
     transform: rotateY(180deg);
   }
 
