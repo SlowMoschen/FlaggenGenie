@@ -16,7 +16,7 @@ const startDeck: IDeck = shuffledCountries.map((country, index) => ({
   id: index,
   type: "image",
   front: country.flagSrc,
-  back: country.name,
+  back: country.abbreviation,
 }));
 const devDeck: IDeck = startDeck.slice(0, 5);
 

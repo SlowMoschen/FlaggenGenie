@@ -1,5 +1,6 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
 import { ICard } from "../types";
+import { useTranslation } from "react-i18next";
 
 interface ICardProps extends React.HTMLProps<HTMLDivElement> {
   card: ICard;
@@ -10,6 +11,7 @@ const Card = forwardRef<HTMLDivElement, ICardProps>(({ card }, ref) => {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [frontDisplay, setFrontDisplay] = useState(front);
   const [backDisplay, setBackDisplay] = useState(back);
+  const { t } = useTranslation('countries');
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
@@ -33,7 +35,7 @@ const Card = forwardRef<HTMLDivElement, ICardProps>(({ card }, ref) => {
           <div className="front">
             <img src={frontDisplay} alt="front" draggable={false}/>
           </div>
-          <div className="back">{backDisplay}</div>
+          <div className="back">{t(backDisplay)}</div>
         </div>
       </div>
     );
