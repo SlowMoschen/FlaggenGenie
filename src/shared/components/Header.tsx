@@ -3,6 +3,7 @@ import dots from "../../assets/icons/three-dots.svg";
 import { arrow } from "../../assets";
 import { useNavigate } from "react-router-dom";
 import { useDialogContext } from "../context/DialogContext";
+import { REDIRECTS } from "../configs/redirectLinks";
 
 interface HeaderProps {
   title: string;
@@ -34,7 +35,7 @@ export default function Header({ title, dotMenu, redirectHome }: HeaderProps) {
       <header className="h-16 w-full bg-slate-300 flex justify-center items-center">
         {redirectHome && (
           <button
-            onClick={() => redirect("/")}
+            onClick={() => redirect(REDIRECTS.HOME)}
             className="absolute left-4 hover:bg-slate-400 p-2 rounded-md"
           >
             <img src={arrow} alt="home" className="h-6 w-6" />

@@ -7,6 +7,8 @@ import { IndexCardContextProvider } from "./pages/index_cards/IndexCardsContext.
 import Home from "./pages/home/Home.tsx";
 import { DialogContextProvider } from "./shared/context/DialogContext.tsx";
 
+import './shared/configs/i18n.ts';
+
 const router = createBrowserRouter([
   {
     path: "/",
