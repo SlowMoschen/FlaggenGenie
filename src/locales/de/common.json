@@ -1,3 +1,9 @@
 {
-    "welcome": "Willkommen bei der App!"
+    "welcome": "Willkommen bei der App!",
+    "settings": "Einstellungen",
+    "language": "Sprache",
+    "chooseLanguage": "Wähle eine Sprache",
+    "username": "Benutzername",
+    "chooseUsername": "Setzte deinen Benutzernamen"
+
 }

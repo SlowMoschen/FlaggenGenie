@@ -8,10 +8,15 @@ import Home from "./pages/home/Home.tsx";
 import { DialogContextProvider } from "./shared/context/DialogContext.tsx";
 
 import './shared/configs/i18n.ts';
+import Landing from "./pages/landing/LandingPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Landing />,
+  },
+  {
+    path: "/home",
     element: <Home />,
   },
   {

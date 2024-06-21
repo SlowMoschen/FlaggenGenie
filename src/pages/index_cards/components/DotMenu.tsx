@@ -3,6 +3,7 @@ import Dialog from "../../../shared/components/Dialog";
 import { useDialogContext } from "../../../shared/context/DialogContext";
 import { useIndexCardContext } from "../IndexCardsContext";
 import Button from "../../../shared/components/Button";
+import DotMenu from "../../../shared/components/DotMenu";
 
 const HelpDialog = () => {
   const { t } = useTranslation("indexCards");
@@ -31,7 +32,7 @@ const StatsDialog = () => {
   return (
     <div className="py-5">
       <h3 className="text-3xl font-bold text-center">{t("stats.header")}</h3>
-      <div className="grid grid-cols-2 gap-5 mt-5 px-3">
+      {/* <div className="grid grid-cols-2 gap-5 mt-5 px-3">
         <div className="font-bold flex flex-col gap-2">
           <p>{t("stats.correct")}</p>
           <p>{t("stats.wrong")}</p>
@@ -41,7 +42,7 @@ const StatsDialog = () => {
           <p>{t("stats.correctPercent")}</p>
           <p>{t("stats.wrongPercent")}</p>
         </div>
-        <div className="flex flex-col gap-2 items-end">
+        <div className="flex flex-col gap-2 items-end justify-end">
           <p>{stats.correct}</p>
           <p>{stats.incorrect}</p>
           <p>{stats.total}</p>
@@ -50,6 +51,36 @@ const StatsDialog = () => {
           <p>{stats.correctPercentage}%</p>
           <p>{stats.incorrectPercentage}%</p>
         </div>
+      </div> */}
+      <div className="flex flex-col gap-2 mt-5 px-5">
+        <p className="flex justify-between">
+          <span className="font-bold">{t("stats.correct")}:</span>
+          <span>{stats.correct}</span>
+        </p>
+        <p className="flex justify-between">
+          <span className="font-bold">{t("stats.wrong")}:</span>
+          <span>{stats.incorrect}</span>
+        </p>
+        <p className="flex justify-between">
+          <span className="font-bold">{t("stats.total")}:</span>
+          <span>{stats.total}</span>
+        </p>
+        <p className="flex justify-between">
+          <span className="font-bold">{t("stats.correctStreak")}:</span>
+          <span>{stats.correctStreak}</span>
+        </p>
+        <p className="flex justify-between">
+          <span className="font-bold">{t("stats.correctStreakBest")}:</span>
+          <span>{stats.maxCorrectStreak}</span>
+        </p>
+        <p className="flex justify-between">
+          <span className="font-bold">{t("stats.correctPercent")}:</span>
+          <span>{stats.correctPercentage}%</span>
+        </p>
+        <p className="flex justify-between">
+          <span className="font-bold">{t("stats.wrongPercent")}:</span>
+          <span>{stats.incorrectPercentage}%</span>
+        </p>
       </div>
     </div>
   );
@@ -67,9 +98,7 @@ export default function IndexCardsDotMenu() {
   };
 
   return (
-    <div
-      className={`dot-menu flex flex-col gap-2 p-3 absolute z-50 top-16 right-3 bg-background-800 rounded`}
-    >
+    <DotMenu>
       <Dialog isOpen={isDialogOpen} onClose={() => closeDialog()}>
         {dialogContent}
       </Dialog>
@@ -82,6 +111,6 @@ export default function IndexCardsDotMenu() {
       <Button onClick={() => openDialog(<HelpDialog />)} buttonSize="medium" variant="secondary">
         {t("dotMenu.help")}
       </Button>
-    </div>
+    </DotMenu>
   );
 }
