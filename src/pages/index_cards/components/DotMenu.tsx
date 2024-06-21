@@ -10,29 +10,19 @@ const HelpDialog = () => {
   return (
     <div className="py-5">
       <div>
-        <h3 className="text-2xl font-semibold text-center">{t('help.why')}</h3>
-        <p className="mt-5">
-          {t('help.whyContent')}
-        </p>
+        <h3 className="text-2xl font-semibold text-center">{t("help.why")}</h3>
+        <p className="mt-5">{t("help.whyContent")}</p>
       </div>
       <div>
-        <h3 className="text-2xl font-semibold text-center mt-5">Wie funktioniert es ?</h3>
-        <p className="mt-5">
-          {t('help.howContent.cardClick')}
-        </p>
-        <p className="mt-5">
-          {t('help.howContent.goNext')}
-        </p>
-        <p className="mt-5">
-          {t('help.howContent.cardMove')}
-        </p>
-        <p className="mt-5">
-          {t('help.howContent.reset')}
-        </p>
+        <h3 className="text-2xl font-semibold text-center mt-5">{t("help.how")}</h3>
+        <p className="mt-5">{t("help.howContent.cardClick")}</p>
+        <p className="mt-5">{t("help.howContent.goNext")}</p>
+        <p className="mt-5">{t("help.howContent.cardMove")}</p>
+        <p className="mt-5">{t("help.howContent.reset")}</p>
       </div>
     </div>
   );
-}
+};
 
 const StatsDialog = () => {
   const { stats } = useIndexCardContext();
@@ -40,7 +30,7 @@ const StatsDialog = () => {
 
   return (
     <div className="py-5">
-      <h3 className="text-3xl font-bold text-center">{t('stats.header')}</h3>
+      <h3 className="text-3xl font-bold text-center">{t("stats.header")}</h3>
       <div className="grid grid-cols-2 gap-5 mt-5 px-3">
         <div className="font-bold flex flex-col gap-2">
           <p>{t("stats.correct")}</p>
@@ -77,17 +67,19 @@ export default function IndexCardsDotMenu() {
   };
 
   return (
-    <div className={`dot-menu flex flex-col gap-2 p-3 absolute z-50 top-16 right-3 bg-background-800 rounded`}>
+    <div
+      className={`dot-menu flex flex-col gap-2 p-3 absolute z-50 top-16 right-3 bg-background-800 rounded`}
+    >
       <Dialog isOpen={isDialogOpen} onClose={() => closeDialog()}>
         {dialogContent}
       </Dialog>
       <Button onClick={handleReset} buttonSize="medium" variant="secondary">
         {t("dotMenu.reset")}
       </Button>
-      <Button onClick={() => openDialog(<StatsDialog/>)} buttonSize="medium" variant="secondary">
+      <Button onClick={() => openDialog(<StatsDialog />)} buttonSize="medium" variant="secondary">
         {t("dotMenu.stats")}
       </Button>
-      <Button onClick={() => openDialog(<HelpDialog/>)} buttonSize="medium" variant="secondary">
+      <Button onClick={() => openDialog(<HelpDialog />)} buttonSize="medium" variant="secondary">
         {t("dotMenu.help")}
       </Button>
     </div>

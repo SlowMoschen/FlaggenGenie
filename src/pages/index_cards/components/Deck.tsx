@@ -13,6 +13,7 @@ interface DeckProps {
 interface CardControlsProps {
   handleCorrect: () => void;
   handleIncorrect: () => void;
+  disabled?: boolean;
 }
 
 interface DeckControlsProps {
@@ -52,13 +53,23 @@ function DeckControls({
   );
 }
 
-function CardControls({ handleCorrect, handleIncorrect }: CardControlsProps) {
+function CardControls({ handleCorrect, handleIncorrect, disabled }: CardControlsProps) {
   return (
     <div className="flex justify-evenly my-3 w-full max-w-sm">
-      <Button onClick={handleIncorrect} buttonSize="medium" variant="game-secondary">
+      <Button
+        onClick={handleIncorrect}
+        buttonSize="medium"
+        variant="game-secondary"
+        disabled={disabled}
+      >
         <img src={closeCross} alt="incorrect" className="h-8 w-8" />
       </Button>
-      <Button onClick={handleCorrect} buttonSize="medium" variant="game-primary">
+      <Button
+        onClick={handleCorrect}
+        buttonSize="medium"
+        variant="game-primary"
+        disabled={disabled}
+      >
         <img src={doneCheck} alt="correct" className="h-8 w-8" />
       </Button>
     </div>
@@ -146,7 +157,11 @@ export default function Deck({ decks }: DeckProps) {
           </div>
         )}
       </div>
-      <CardControls handleCorrect={handleCorrect} handleIncorrect={handleIncorrect} />
+      <CardControls
+        handleCorrect={handleCorrect}
+        handleIncorrect={handleIncorrect}
+        disabled={decks.getDeck(currentDeckIndex)?.length === 0}
+      />
     </div>
   );
 }
