@@ -8,21 +8,22 @@ import Home from "./pages/home/Home.tsx";
 import { DialogContextProvider } from "./shared/context/DialogContext.tsx";
 
 import './shared/configs/i18n.ts';
-import Landing from "./pages/landing/LandingPage.tsx";
+import CountryList from "./pages/list/CountryList.tsx";
+import { countries } from "./Countries.ts";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Landing />,
-  },
-  {
-    path: "/home",
     element: <Home />,
   },
   {
     path: "/index-cards",
     element: <IndexCards />,
   },
+  {
+    path: "/list",
+    element: <CountryList countries={countries} />,
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

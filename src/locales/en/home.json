@@ -1,0 +1,28 @@
+{
+    "welcome": "Welcome {{name}}!",
+    "dotMenu": {
+        "settings": "Settings",
+        "about": "About"
+    },
+    "settings": {
+        "language": "Language",
+        "chooseLanguage": "Choose a language",
+        "username": "Username",
+        "chooseUsername": "Set a username"
+    },
+    "about": {
+    "title": "About the App",
+    "text": "This app was developed only for educational purposes. The app is open source and you can find the code on GitHub.",
+    "contact": "Contact me",
+    "contactText": "If you have any questions or suggestions, feel free to contact me via ",
+    "email": "E-Mail.",
+    "github": "GitHub",
+    "githubText": "You can find the code of this app on GitHub."
+  },
+  "indexCards": "Index Cards",
+  "allCards": "All Flags",
+  "quiz": "Quiz",
+  "quizTitle": "10 Levels",
+  "regions": "Regions",
+  "list": "List"
+}

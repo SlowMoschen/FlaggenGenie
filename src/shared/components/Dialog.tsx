@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import { closeCross } from "../../assets";
 import { useEffect, useRef } from "react";
 import Button from "./Button";
+import { useTranslation } from "react-i18next";
 
 interface DialogProps {
   isOpen: boolean;
@@ -11,6 +12,7 @@ interface DialogProps {
 
 export default function Dialog({ isOpen, onClose, children }: DialogProps) {
   const contentRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -44,7 +46,7 @@ export default function Dialog({ isOpen, onClose, children }: DialogProps) {
           </Button>
           {children}
           <Button onClick={onClose} className="mt-4" variant="primary" buttonSize="medium">
-            Schließen
+            {t("button.close")}
           </Button>
         </div>
       </div>

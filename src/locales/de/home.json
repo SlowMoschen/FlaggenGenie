@@ -1,0 +1,28 @@
+{
+  "welcome": "Willkommen {{name}}!",
+  "dotMenu": {
+    "settings": "Einstellungen",
+    "about": "Über"
+  },
+  "settings": {
+    "language": "Sprache",
+    "chooseLanguage": "Wähle eine Sprache",
+    "username": "Benutzername",
+    "chooseUsername": "Setzte deinen Benutzernamen"
+  },
+  "about": {
+    "title": "Über uns",
+    "text": "Diese App wurde für Lernzwecke entwickelt. Der Source Code ist auf GitHub verfügbar.",
+    "contact": "Kontaktiere mich",
+    "contactText": "Wenn du Fragen hast, schreib mir eine ",
+    "email": "E-Mail.",
+    "github": "GitHub",
+    "githubText": "Hier findest du den Source Code der App."
+  },
+  "indexCards": "Karteikarten",
+  "allCards": "Alle Flaggen",
+  "quiz": "Quiz",
+  "quizTitle": "10 Level",
+  "regions": "Regionen",
+  "list": "Liste"
+}

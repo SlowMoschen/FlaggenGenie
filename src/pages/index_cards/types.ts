@@ -46,7 +46,7 @@ export class Decks {
   }
 }
 
-export interface IUserState {
+export interface IIndexGameState {
   decks: typeof Decks.prototype;
   stats: {
     correct: number;

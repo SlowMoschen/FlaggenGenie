@@ -1,0 +1,10 @@
+{
+  "headerTitle": "Country Details",
+  "name": "Name",
+  "capital": "Capital",
+  "region": "Region",
+  "area": "Area",
+  "population": "Population",
+  "flag": "Flag",
+  "currency": "Currency"
+}

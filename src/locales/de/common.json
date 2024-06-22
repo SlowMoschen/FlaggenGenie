@@ -1,9 +1,10 @@
 {
-    "welcome": "Willkommen bei der App!",
-    "settings": "Einstellungen",
-    "language": "Sprache",
-    "chooseLanguage": "Wähle eine Sprache",
-    "username": "Benutzername",
-    "chooseUsername": "Setzte deinen Benutzernamen"
-
+  "welcome": "Willkommen bei der App!",
+  "button": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter"
+  }
 }

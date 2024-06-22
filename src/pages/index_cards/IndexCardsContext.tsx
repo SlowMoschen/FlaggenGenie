@@ -1,17 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Decks, IUserState } from "./types.ts";
+import { Decks, IIndexGameState,  } from "./types.ts";
 
 interface IAppContext {
   decks: typeof Decks.prototype;
-  stats: IUserState["stats"];
+  stats: IIndexGameState["stats"];
   saveUserState: () => void;
   resetUserState: () => void;
   updateStats: (correct: boolean) => void;
 }
 
-const USER_STATE_KEY = "flashcards-user-state";
+const GAME_STATE_KEY = "flashcards-user-state";
 
-const INITIAL_USER_STATE: IUserState = {
+const INITIAL_GAME_STATE: IIndexGameState = {
   decks: new Decks(),
   stats: {
     correct: 0,
@@ -27,8 +27,8 @@ const INITIAL_USER_STATE: IUserState = {
 const IndexCardContext = createContext<IAppContext | null>(null);
 
 const IndexCardContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [decks, setDecks] = useState(INITIAL_USER_STATE.decks);
-  const [stats, setStats] = useState(INITIAL_USER_STATE.stats);
+  const [decks, setDecks] = useState(INITIAL_GAME_STATE.decks);
+  const [stats, setStats] = useState(INITIAL_GAME_STATE.stats);
 
   const updateStats = (correct: boolean) => {
     const updatedStats = { ...stats };
@@ -52,10 +52,10 @@ const IndexCardContextProvider = ({ children }: { children: React.ReactNode }) =
   };
 
   const saveUserState = () =>
-    localStorage.setItem(USER_STATE_KEY, JSON.stringify({ decks: decks.allDecks, stats }));
+    localStorage.setItem(GAME_STATE_KEY, JSON.stringify({ decks: decks.allDecks, stats }));
 
   const loadUserState = () => {
-    const userState = localStorage.getItem(USER_STATE_KEY);
+    const userState = localStorage.getItem(GAME_STATE_KEY);
     if (!userState) return console.warn("No user state found in local storage");
 
     const parsedUserState = JSON.parse(userState);
@@ -65,8 +65,8 @@ const IndexCardContextProvider = ({ children }: { children: React.ReactNode }) =
 
   const resetUserState = () => {
     setDecks(new Decks());
-    setStats(INITIAL_USER_STATE.stats);
-    localStorage.removeItem(USER_STATE_KEY);
+    setStats(INITIAL_GAME_STATE.stats);
+    localStorage.removeItem(GAME_STATE_KEY);
     window.location.reload();
   };
 
@@ -89,3 +89,4 @@ const useIndexCardContext = () => {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export { IndexCardContext, IndexCardContextProvider, useIndexCardContext };
+

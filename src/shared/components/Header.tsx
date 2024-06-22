@@ -32,7 +32,7 @@ export default function Header({ title, dotMenu, redirectHome }: HeaderProps) {
 
   return (
     <>
-      <header className="h-16 w-full bg-background-500 flex justify-center items-center">
+      <header className="min-h-16 w-full bg-background-500 flex justify-center items-center">
         {redirectHome && (
           <button
             onClick={() => redirect(REDIRECTS.HOME)}
@@ -41,7 +41,7 @@ export default function Header({ title, dotMenu, redirectHome }: HeaderProps) {
             <img src={arrow} alt="home" className="h-6 w-6" />
           </button>
         )}
-        <h1 className="text-2xl font-bold text-white">{title}</h1>
+        <h1 className="text-xl lg:text-2xl font-bold text-white">{title}</h1>
         {dotMenu && (
           <>
             <button

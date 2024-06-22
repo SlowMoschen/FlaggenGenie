@@ -1,5 +1,5 @@
 export const REDIRECTS = {
-  LANDING: "/",
-  HOME: "/home",
+  HOME: "/",
   INDEX_CARDS: "/index-cards",
+  LIST: "/list",
 };

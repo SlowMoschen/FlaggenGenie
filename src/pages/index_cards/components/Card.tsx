@@ -35,7 +35,7 @@ const Card = forwardRef<HTMLDivElement, ICardProps>(({ card }, ref) => {
           <div className="front">
             <img src={frontDisplay} alt="front" draggable={false}/>
           </div>
-          <div className="back">{t(backDisplay)}</div>
+          <div className="back">{t(`${backDisplay}.name`)}</div>
         </div>
       </div>
     );
