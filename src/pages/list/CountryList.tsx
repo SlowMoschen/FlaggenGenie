@@ -3,7 +3,7 @@ import { Country } from "../../Countries";
 import Header from "../../shared/components/Header";
 import { arrow } from "../../assets";
 import Button from "../../shared/components/Button";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface CountryListProps {
   countries: Country[];
@@ -12,6 +12,9 @@ interface CountryListProps {
 export default function CountryList({ countries }: CountryListProps) {
   const { t } = useTranslation("list");
   const listRef = useRef<HTMLTableElement>(null);
+  const [isImageDisplayed, setIsImageDisplayed] = useState(false);
+  const [imageSrc, setImageSrc] = useState("");
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const scrollToTop = () => {
     if (listRef.current) {
@@ -25,10 +28,37 @@ export default function CountryList({ countries }: CountryListProps) {
     }
   };
 
+  const handleFlagClick = (country: Country) => {
+    setIsImageDisplayed(true);
+    setImageSrc(country.flagSrc);
+  };
+
+  const hanldeOutsideClick = (event: MouseEvent) => {
+    event.stopPropagation();
+    if (dialogRef.current && !dialogRef.current.contains(event.target as Node)) {
+      setIsImageDisplayed(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mouseup", hanldeOutsideClick);
+
+    return () => document.removeEventListener("mouseup", hanldeOutsideClick);
+  }, []);
+
   return (
     <>
       <Header title={t("headerTitle")} redirectHome />
       <main className="overflow-y-auto  w-full place-content-center" ref={listRef}>
+        {
+          isImageDisplayed && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background-50 bg-opacity-30 p-2">
+              <div className="bg-background-950 p-10 rounded-lg" ref={dialogRef}>
+                <img src={imageSrc} alt="flag" className="h-64 w-96 object-contain" />
+              </div>
+            </div>
+          )
+        }
         <table className="lg:table-fixed w-full">
           <thead className="border-b border-text-50 sticky top-0 bg-background-600 h-10">
             <tr>
@@ -48,9 +78,10 @@ export default function CountryList({ countries }: CountryListProps) {
                 <tr key={i} className="h-20 border-b border-text-50 odd:bg-background-800">
                   <td className="px-2">
                     <img
-                      className="h-8 w-12"
+                      className="h-8 w-12 object-contain cursor-pointer"
                       src={country.flagSrc}
                       alt={`${country.abbreviation} flag`}
+                      onClick={() => handleFlagClick(country)}
                     />
                   </td>
                   <td className="px-2">{t(`${country.abbreviation}.name`, { ns: "countries" })}</td>
