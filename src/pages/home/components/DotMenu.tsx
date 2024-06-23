@@ -5,13 +5,13 @@ import Button from "../../../shared/components/Button";
 import Dialog from "../../../shared/components/Dialog";
 import DotMenu from "../../../shared/components/DotMenu";
 import { useDialogContext } from "../../../shared/context/DialogContext";
-import { useAppStorage } from "../../../shared/hooks/useLocalStorage";
+import { useAppStorage } from "../../../shared/hooks/useAppStorage";
 import { useDebouncedCallback } from "use-debounce";
 
 function MainSettings() {
   const { t } = useTranslation("home");
   const { getStoredItem, storeItem } = useAppStorage();
-  const [userName, setUserName] = useState<string>(getStoredItem("username") || "");
+  const [userName, setUserName] = useState<string>(getStoredItem("name") || "");
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log(e.target.value);
@@ -21,7 +21,7 @@ function MainSettings() {
   };
 
   const debouncedStoreUsername = useDebouncedCallback((value: string) => {
-    storeItem("username", value);
+    storeItem("name", value);
   }, 300);
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -8,5 +8,6 @@ import indexCards from "../assets/icons/indexCards.png";
 import quiz from "../assets/icons/quiz.png";
 import regions from "../assets/icons/regions.png";
 import list from "../assets/icons/list.png";
+import edit from "../assets/icons/edit.svg";
 
-export { arrow, doneCheck, closeCross, cardsIcon, decksIcon, emptyIcon, indexCards, quiz, regions, list };
+export { arrow, doneCheck, closeCross, cardsIcon, decksIcon, emptyIcon, indexCards, quiz, regions, list, edit };

@@ -1,4 +1,10 @@
+export interface GameState {
+    [key: string]: unknown;
+}
+
 export interface AppStorage {
-    username: string;
+    name: string;
+    status: string;
+    avatar: string;
     language: string;
 }

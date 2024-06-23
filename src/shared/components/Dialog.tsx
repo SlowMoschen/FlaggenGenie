@@ -33,7 +33,7 @@ export default function Dialog({ isOpen, onClose, children }: DialogProps) {
     (
       <div className="dialog fixed inset-0 z-[100] flex items-center justify-center bg-background-50 bg-opacity-30 p-2">
         <div
-          className="bg-background-950 p-4 rounded-lg relative w-full max-w-sm min-h-[50%] max-h-[80%] overflow-y-auto border-8 border-primary-500"
+          className="bg-background-950 p-4 rounded-lg relative w-full max-w-sm min-h-[50%] max-h-[600px] overflow-y-auto border-8 border-primary-500"
           ref={contentRef}
         >
           <Button

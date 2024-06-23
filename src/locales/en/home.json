@@ -8,7 +8,9 @@
         "language": "Language",
         "chooseLanguage": "Choose a language",
         "username": "Username",
-        "chooseUsername": "Set a username"
+        "chooseUsername": "Set a username",
+        "status": "Status",
+        "chooseStatus": "Set a status"
     },
     "about": {
     "title": "About the App",
@@ -20,9 +22,7 @@
     "githubText": "You can find the code of this app on GitHub."
   },
   "indexCards": "Index Cards",
-  "allCards": "All Flags",
-  "quiz": "Quiz",
-  "quizTitle": "10 Levels",
+  "quiz": "Quizzes",
   "regions": "Regions",
   "list": "List"
 }

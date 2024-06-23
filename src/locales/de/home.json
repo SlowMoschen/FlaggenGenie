@@ -8,7 +8,9 @@
     "language": "Sprache",
     "chooseLanguage": "Wähle eine Sprache",
     "username": "Benutzername",
-    "chooseUsername": "Setzte deinen Benutzernamen"
+    "chooseUsername": "Setzte deinen Benutzernamen",
+    "status": "Status",
+    "chooseStatus": "Setzte deinen Status"
   },
   "about": {
     "title": "Über uns",
@@ -21,8 +23,7 @@
   },
   "indexCards": "Karteikarten",
   "allCards": "Alle Flaggen",
-  "quiz": "Quiz",
-  "quizTitle": "10 Level",
+  "quiz": "Quizze",
   "regions": "Regionen",
   "list": "Liste"
 }

@@ -1,5 +1,13 @@
+import { useEffect } from "react";
 import { APP } from "../configs";
 import { AppStorage } from "../types";
+
+const INITIAL_STATE: AppStorage = {
+  name: "John Doe",
+  status: "Brave Rookie",
+  avatar: "/avatars/avatar-1.svg",
+  language: "en",
+};
 
 export function useAppStorage() {
   const storeState = (state: AppStorage) =>
@@ -11,7 +19,8 @@ export function useAppStorage() {
       const newState = { ...storedState, [key]: value };
       storeState(newState);
     } else {
-      throw new Error("No stored state found");
+      const newState = { ...INITIAL_STATE, [key]: value };
+      storeState(newState);
     }
   };
 
@@ -20,12 +29,17 @@ export function useAppStorage() {
     return storedState ? JSON.parse(storedState) : null;
   };
 
-  const getStoredItem = (key: keyof AppStorage): string | null => {
+  const getStoredItem = (key: keyof AppStorage) => {
     const storedState = getStoredState();
     return storedState ? storedState[key] : null;
   };
 
   const resetStorage = () => localStorage.removeItem(APP.STORAGE_KEY);
+
+  useEffect(() => {
+    const storedState = getStoredState();
+    if (!storedState) storeState(INITIAL_STATE);
+  }, []);
 
   return { storeItem, getStoredState, resetStorage, storeState, getStoredItem };
 }
