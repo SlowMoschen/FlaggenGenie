@@ -6,10 +6,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { IndexCardContextProvider } from "./pages/index_cards/IndexCardsContext.tsx";
 import Home from "./pages/home/Home.tsx";
 import { DialogContextProvider } from "./shared/context/DialogContext.tsx";
-
-import './shared/configs/i18n.ts';
 import CountryList from "./pages/list/CountryList.tsx";
 import { countries } from "./Countries.ts";
+
+import './shared/configs/i18n.ts';
 
 const router = createBrowserRouter([
   {

@@ -19,6 +19,12 @@ export default function CountryList({ countries }: CountryListProps) {
     }
   };
 
+  const scrollToBottom = () => {
+    if (listRef.current) {
+      listRef.current.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <Header title={t("headerTitle")} redirectHome />
@@ -36,28 +42,51 @@ export default function CountryList({ countries }: CountryListProps) {
             </tr>
           </thead>
           <tbody>
-            {countries.map((country, i) => (
-              <tr key={i} className="h-20 border-b border-text-50 odd:bg-background-800">
-                <td className="px-2">
-                  <img
-                    className="h-8 w-12"
-                    src={country.flagSrc}
-                    alt={`${country.abbreviation} flag`}
-                  />
-                </td>
-                <td className="px-2">{t(`${country.abbreviation}.name`, { ns: "countries" })}</td>
-                <td className="px-2">{t(`${country.abbreviation}.capital`, { ns: "countries" })}</td>
-                <td className="px-2">{t(`${country.abbreviation}.region`, { ns: "countries" })}</td>
-                <td className="px-2">{Number(country.facts.area).toLocaleString()} km²</td>
-                <td className="px-2">{Number(country.facts.population).toLocaleString()}</td>
-                <td className="px-2">{t(`${country.abbreviation}.currency`, { ns: "countries" })}</td>
-              </tr>
-            ))}
+            {countries
+              .sort((a, b) => a.abbreviation.localeCompare(b.abbreviation))
+              .map((country, i) => (
+                <tr key={i} className="h-20 border-b border-text-50 odd:bg-background-800">
+                  <td className="px-2">
+                    <img
+                      className="h-8 w-12"
+                      src={country.flagSrc}
+                      alt={`${country.abbreviation} flag`}
+                    />
+                  </td>
+                  <td className="px-2">{t(`${country.abbreviation}.name`, { ns: "countries" })}</td>
+                  <td className="px-2">
+                    {t(`${country.abbreviation}.capital`, { ns: "countries" })}
+                  </td>
+                  <td className="px-2">
+                    {t(`${country.abbreviation}.region`, { ns: "countries" })}
+                  </td>
+                  <td className="px-2">{Number(country.facts.area).toLocaleString()} km²</td>
+                  <td className="px-2">{Number(country.facts.population).toLocaleString()}</td>
+                  <td className="px-2">
+                    {t(`${country.abbreviation}.currency`, { ns: "countries" })}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
-        <Button className="fixed z-20 bottom-5 right-5 bg-background-500" buttonSize="xsmall" variant="icon" onClick={() => scrollToTop()}>
+        <div className="flex gap-2 justify-end fixed bottom-4 right-5">
+        <Button
+          className="bg-background-500"
+          buttonSize="xsmall"
+          variant="icon"
+          onClick={() => scrollToTop()}
+        >
           <img src={arrow} alt="top" className="h-6 w-6 rotate-90" />
         </Button>
+        <Button
+          className="bg-background-500"
+          buttonSize="xsmall"
+          variant="icon"
+          onClick={() => scrollToBottom()}
+        >
+          <img src={arrow} alt="bottom" className="h-6 w-6 -rotate-90" />
+        </Button>
+        </div>
       </main>
     </>
   );
