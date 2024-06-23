@@ -149,7 +149,7 @@ export default function Deck({ decks }: DeckProps) {
       />
       <div className="card-container relative h-full w-full max-w-sm bg-slate-300">
         {currentCard ? (
-          <Card card={currentCard} />
+          <Card card={currentCard} onRightSwipe={handleCorrect} onLeftSwipe={handleIncorrect} />
         ) : (
           <div className="flex flex-col justify-center items-center gap-10 h-full w-full bg-red-200 rounded shadow-md text-xl text-center ">
             <img src={emptyIcon} alt="empty" className="h-28 w-28" />
