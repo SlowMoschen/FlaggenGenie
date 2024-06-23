@@ -1,7 +1,7 @@
 {
   "welcome": "Willkommen {{name}}!",
   "dotMenu": {
-    "settings": "Einstellungen",
+    "settings": "Sprache",
     "about": "Über"
   },
   "settings": {

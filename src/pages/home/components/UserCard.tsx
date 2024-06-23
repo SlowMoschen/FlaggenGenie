@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Button from "../../../shared/components/Button";
 import Dialog from "../../../shared/components/Dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserProps } from "../../../shared/hooks/useUserProps";
 import AvatarIcon from "../../../shared/components/AvatarIcon";
 import { arrow } from "../../../assets";
@@ -14,6 +14,7 @@ interface UserCardProps {
 
 function AvatarList() {
   const { storeItem } = useAppStorage();
+  const { avatar } = useUserProps();
   const avatars = Array.from({ length: 20 }, (_, i) => `/avatars/avatar-${i + 1}.svg`);
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState(0);
@@ -22,6 +23,10 @@ function AvatarList() {
     setSelectedAvatar(index);
     storeItem("avatar", avatars[index]);
   };
+
+  useEffect(() => {
+    setSelectedAvatar(avatars.indexOf(avatar));
+  }, [storeItem, avatars, avatar]);
 
   return (
     <>
@@ -68,10 +73,14 @@ function EditProfileDialog() {
   const debounceStoreState = useDebouncedCallback((value: { name: string; status: string }) => {
     storeItem("name", value.name);
     storeItem("status", value.status);
-    console.log("Stored in local storage");
   }, 300);
 
   const handleInputChange = (key: "name" | "status", value: string) => {
+    if (value.length === 0) {
+      setFormProps({ ...formProps, [key]: "" });
+      return;
+    }
+
     setFormProps({ ...formProps, [key]: value });
     debounceStoreState({ ...formProps, [key]: value });
   };

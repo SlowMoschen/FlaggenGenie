@@ -20,6 +20,33 @@ body {
   justify-content: flex-start;
   align-items: center;
   height: 100vh;
+  overflow-x: hidden;
+}
+
+.left-swipe {
+  animation: left-swipe 0.3s ease-in-out;
+}
+
+.right-swipe {
+  animation: right-swipe 0.3s ease-in-out;
+}
+
+@keyframes left-swipe {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-300%);
+  }
+}
+
+@keyframes right-swipe {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(300%);
+  }
 }
 
 @layer components {
@@ -29,6 +56,10 @@ body {
 
   .card-container {
     perspective: 1000px;
+  }
+
+  .thin-scrollbar {
+    scrollbar-width: thin;
   }
 
   .swiper {
