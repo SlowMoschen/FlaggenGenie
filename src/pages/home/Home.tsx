@@ -33,9 +33,10 @@ export default function Home() {
           icon={quiz}
           linkTo={REDIRECTS.INDEX_CARDS}
           title={t("quiz")}
+          disabled
           className="col-span-full"
         />
-        <GameCard icon={regions} linkTo={REDIRECTS.INDEX_CARDS} title={t("regions")} />
+        <GameCard icon={regions} linkTo={REDIRECTS.INDEX_CARDS} title={t("regions")} disabled/>
         <GameCard icon={list} linkTo={REDIRECTS.LIST} title={t("list")} />
       </main>
     </>
