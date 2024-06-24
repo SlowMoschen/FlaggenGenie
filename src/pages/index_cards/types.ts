@@ -46,15 +46,12 @@ export class Decks {
   }
 }
 
-export interface IIndexGameState {
-  decks: typeof Decks.prototype;
-  stats: {
-    correct: number;
-    incorrect: number;
-    total: number;
-    correctStreak: number;
-    maxCorrectStreak: number;
-    correctPercentage: number;
-    incorrectPercentage: number;
-  };
+export interface TrackedIndexCardStats {
+  correct: number;
+  incorrect: number;
+  total: number;
+  correctStreak: number;
+  maxCorrectStreak: number;
+  correctPercentage: number;
+  incorrectPercentage: number;
 }

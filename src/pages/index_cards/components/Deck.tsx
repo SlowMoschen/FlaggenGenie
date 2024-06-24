@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import { DeckIndex, Decks } from "../types";
-import Button from "../../../shared/components/Button";
-import { arrow, cardsIcon, closeCross, decksIcon, doneCheck, emptyIcon } from "../../../assets";
-import Card from "./Card";
-import { useIndexCardContext } from "../IndexCardsContext";
 import { useTranslation } from "react-i18next";
+import { arrow, cardsIcon, closeCross, decksIcon, doneCheck, emptyIcon } from "../../../assets";
+import Button from "../../../shared/components/Button";
+import { useIndexCardsLogic } from "../useIndexCardLogic";
+import { Decks } from "../types";
+import Card from "./Card";
 
 interface DeckProps {
   decks: typeof Decks.prototype;
@@ -77,74 +76,25 @@ function CardControls({ handleCorrect, handleIncorrect, disabled }: CardControls
 }
 
 export default function Deck({ decks }: DeckProps) {
-  const { saveUserState, updateStats } = useIndexCardContext();
-  const [currentDeckIndex, setCurrentDeckIndex] = useState<DeckIndex>(0);
-  const [currentCard, setCurrentCard] = useState(decks.getDeck(currentDeckIndex)?.[0]);
   const { t } = useTranslation("indexCards");
-
-  const isLastDeck = currentDeckIndex === decks.length - 1;
-  const isFirstDeck = currentDeckIndex === 0;
-
-  const handleCorrect = async () => {
-    const removedCard = decks.getDeck(currentDeckIndex)?.shift();
-    if (!removedCard) return;
-
-    if (isLastDeck) {
-      decks.getDeck(currentDeckIndex)?.push(removedCard);
-    } else {
-      decks.getDeck((currentDeckIndex + 1) as DeckIndex)?.push(removedCard);
-    }
-    setCurrentCard(decks.getDeck(currentDeckIndex)?.[0]);
-    updateStats(true);
-    saveUserState();
-  };
-
-  const handleIncorrect = async () => {
-    const removedCard = decks.getDeck(currentDeckIndex)?.shift();
-    if (!removedCard) return;
-
-    if (isFirstDeck) {
-      decks.getDeck(currentDeckIndex)?.push(removedCard);
-    } else {
-      decks.getDeck((currentDeckIndex - 1) as DeckIndex)?.push(removedCard);
-    }
-    setCurrentCard(decks.getDeck(currentDeckIndex)?.[0]);
-    updateStats(false);
-    saveUserState();
-  };
-
-  const handleNextDeck = () => {
-    if (isLastDeck) return;
-    setCurrentDeckIndex((prev) => (prev + 1) as DeckIndex);
-    saveUserState();
-  };
-
-  const handlePreviousDeck = () => {
-    if (isFirstDeck) return;
-    setCurrentDeckIndex((prev) => (prev - 1) as DeckIndex);
-    saveUserState();
-  };
-
-  useEffect(() => {
-    setCurrentCard(decks.getDeck(currentDeckIndex)?.[0]);
-  }, [currentDeckIndex, decks]);
+  const { handleCorrect, handleIncorrect, handleNextDeck, handlePreviousDeck, currentCard, deckIndex } = useIndexCardsLogic(decks);
 
   return (
     <div className="h-full w-full relative flex flex-col items-center justify-center p-2 py-10">
       <div className="flex items-center justify-center w-full max-w-sm gap-5">
         <div className="flex items-center justify-center mb-3 font-semibold">
           <img src={cardsIcon} alt="cards" className="h-8 w-8 inline-block mr-2" />
-          Decks {currentDeckIndex + 1} / {decks.length}
+          Decks {deckIndex + 1} / {decks.length}
         </div>
         <div className="flex items-center justify-center mb-3 font-semibold">
           <img src={decksIcon} alt="decks" className="h-8 w-8 inline-block mr-2" />
-          {decks.getDeck(currentDeckIndex)?.length} {t("cards")}
+          {decks.getDeck(deckIndex)?.length} {t("cards")}
         </div>
       </div>
       <DeckControls
         handleNextDeck={handleNextDeck}
         handlePreviousDeck={handlePreviousDeck}
-        currentDeckIndex={currentDeckIndex}
+        currentDeckIndex={deckIndex}
         totalDecks={decks.length}
       />
       <div className="card-container relative h-full w-full max-w-sm bg-slate-300">
@@ -160,7 +110,7 @@ export default function Deck({ decks }: DeckProps) {
       <CardControls
         handleCorrect={handleCorrect}
         handleIncorrect={handleIncorrect}
-        disabled={decks.getDeck(currentDeckIndex)?.length === 0}
+        disabled={decks.getDeck(deckIndex)?.length === 0}
       />
     </div>
   );

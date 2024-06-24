@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import Dialog from "../../../shared/components/Dialog";
-import { useDialogContext } from "../../../shared/context/DialogContext";
-import { useIndexCardContext } from "../IndexCardsContext";
 import Button from "../../../shared/components/Button";
+import Dialog from "../../../shared/components/Dialog";
 import DotMenu from "../../../shared/components/DotMenu";
+import { useDialogContext } from "../../../shared/context/DialogContext";
+import { useAppStorage } from "../../../shared/hooks/useAppStorage";
 
 const HelpDialog = () => {
   const { t } = useTranslation("indexCards");
@@ -26,32 +27,13 @@ const HelpDialog = () => {
 };
 
 const StatsDialog = () => {
-  const { stats } = useIndexCardContext();
+  const { getStoredItem } = useAppStorage();
   const { t } = useTranslation("indexCards");
+  const [stats, _] = useState(getStoredItem("stats")!.indexCards!);
 
   return (
     <div className="py-5">
       <h3 className="text-3xl font-bold text-center">{t("stats.header")}</h3>
-      {/* <div className="grid grid-cols-2 gap-5 mt-5 px-3">
-        <div className="font-bold flex flex-col gap-2">
-          <p>{t("stats.correct")}</p>
-          <p>{t("stats.wrong")}</p>
-          <p>{t("stats.total")}</p>
-          <p>{t("stats.correctStreak")}</p>
-          <p>{t("stats.correctStreakBest")}</p>
-          <p>{t("stats.correctPercent")}</p>
-          <p>{t("stats.wrongPercent")}</p>
-        </div>
-        <div className="flex flex-col gap-2 items-end justify-end">
-          <p>{stats.correct}</p>
-          <p>{stats.incorrect}</p>
-          <p>{stats.total}</p>
-          <p>{stats.correctStreak}</p>
-          <p>{stats.maxCorrectStreak}</p>
-          <p>{stats.correctPercentage}%</p>
-          <p>{stats.incorrectPercentage}%</p>
-        </div>
-      </div> */}
       <div className="flex flex-col gap-2 mt-5 px-5">
         <p className="flex justify-between">
           <span className="font-bold">{t("stats.correct")}:</span>
@@ -87,13 +69,15 @@ const StatsDialog = () => {
 };
 
 export default function IndexCardsDotMenu() {
-  const { resetUserState } = useIndexCardContext();
+  const { resetStoredStats, resetStoredStates } = useAppStorage();
   const { isDialogOpen, openDialog, dialogContent, closeDialog } = useDialogContext();
   const { t } = useTranslation("indexCards");
 
   const handleReset = () => {
     if (window.confirm(t("resetConfirm"))) {
-      resetUserState();
+      resetStoredStats("indexCards");
+      resetStoredStates("indexCards");
+      window.location.reload();
     }
   };
 

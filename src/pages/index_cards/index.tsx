@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Header from "../../shared/components/Header";
 import { LoadingScreen } from "../../shared/components/LoadingScreen";
-import { useIndexCardContext } from "./IndexCardsContext";
+import { useAppStorage } from "../../shared/hooks/useAppStorage";
 import Deck from "./components/Deck";
 import DotMenu from "./components/DotMenu";
+import { Decks } from "./types";
 
 function IndexCards() {
-  const { decks } = useIndexCardContext();
+  const { getStoredItem } = useAppStorage();
   const [isLoaded, setIsLoaded] = useState(false);
   const { t } = useTranslation('indexCards');
 
@@ -24,7 +25,7 @@ function IndexCards() {
   return (
     <>
       <Header title={t('header')} dotMenu={<DotMenu />} redirectHome/>
-      <Deck decks={decks} />
+      <Deck decks={new Decks(getStoredItem('states')!.indexCards.allDecks)} />
     </>
   );
 }
