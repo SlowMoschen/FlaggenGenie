@@ -1,0 +1,10 @@
+{
+    "headerTitle": "Länderinformationen",
+    "name": "Name",
+    "capital": "Hauptstadt",
+    "region": "Region",
+    "area": "Fläche",
+    "population": "Einwohner",
+    "flag": "Flagge",
+    "currency": "Währung"
+}

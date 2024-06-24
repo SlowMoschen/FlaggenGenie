@@ -10,21 +10,56 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   height: 100vh;
 }
 
 #root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.left-swipe {
+  animation: left-swipe 0.3s ease-in-out;
+}
+
+.right-swipe {
+  animation: right-swipe 0.3s ease-in-out;
+}
+
+@keyframes left-swipe {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-300%);
+  }
+}
+
+@keyframes right-swipe {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(300%);
+  }
 }
 
 @layer components {
+  body {
+    @apply bg-primary-900 text-text-50;
+  }
+
   .card-container {
     perspective: 1000px;
+  }
+
+  .thin-scrollbar {
+    scrollbar-width: thin;
   }
 
   .swiper {
@@ -44,7 +79,7 @@ body {
   }
 
   .front {
-    @apply bg-gray-300 select-none;
+    @apply bg-primary-800 select-none;
 
     img {
       @apply w-full h-full object-scale-down rounded;
@@ -52,7 +87,7 @@ body {
   }
 
   .back {
-    @apply bg-blue-300 text-4xl text-center;
+    @apply bg-primary-600 text-4xl text-center;
     transform: rotateY(180deg);
   }
 

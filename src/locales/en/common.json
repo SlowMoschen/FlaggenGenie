@@ -1,0 +1,12 @@
+{
+    "welcome": "Welcome to this page!",
+    "button": {
+        "save": "Save",
+        "cancel": "Cancel",
+        "close": "Close",
+        "back": "Back",
+        "next": "Next",
+        "edit": "Edit"
+    },
+    "comingSoon": "Comming soon"
+}

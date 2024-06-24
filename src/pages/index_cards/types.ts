@@ -1,4 +1,4 @@
-import { countries } from "./Countries";
+import { countries } from "../../Countries";
 
 export interface ICard {
   id: number;
@@ -16,7 +16,7 @@ const startDeck: IDeck = shuffledCountries.map((country, index) => ({
   id: index,
   type: "image",
   front: country.flagSrc,
-  back: country.name,
+  back: country.abbreviation,
 }));
 const devDeck: IDeck = startDeck.slice(0, 5);
 
@@ -46,7 +46,12 @@ export class Decks {
   }
 }
 
-export interface IUserState {
-  name: string;
-  decks: typeof Decks.prototype;
+export interface TrackedIndexCardStats {
+  correct: number;
+  incorrect: number;
+  total: number;
+  correctStreak: number;
+  maxCorrectStreak: number;
+  correctPercentage: number;
+  incorrectPercentage: number;
 }

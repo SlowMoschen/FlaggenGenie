@@ -1,0 +1,31 @@
+{
+  "header": "Index Cards",
+  "cards": "Cards",
+  "dotMenu": {
+    "reset": "Reset",
+    "stats": "Statistics",
+    "help": "Help"
+  },
+  "stats": {
+    "header": "Statistics",
+    "total": "Total",
+    "correct": "Correct",
+    "wrong": "Wrong",
+    "correctPercent": "Correct %",
+    "wrongPercent": "Wrong %",
+    "correctStreak": "Correct Streak",
+    "correctStreakBest": "Best Correct Streak"
+  },
+  "help": {
+    "why": "Why use Index Cards?",
+    "whyContent": "Index Cards are an effective way to learn and review knowledge. The cards allow you to easily learn the flags of the world.",
+    "how": "How to use Index Cards?",
+    "howContent": {
+      "cardClick": "Click on a card to turn it over and see the answer.",
+      "goNext": "Click on the 'X' if you don't know the card. Click on the 'checkmark' if you know the card.",
+      "cardMove": "Correct cards will be moved to the next deck and wrong cards to the previous deck.",
+      "reset": "You can click on 'Reset' at any time to reset all data."
+    }
+  },
+  "resetConfirm": "Do you really want to reset all data? This action cannot be undone."
+}

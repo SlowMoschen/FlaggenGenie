@@ -1,0 +1,12 @@
+{
+  "welcome": "Willkommen bei der App!",
+  "button": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "edit": "Bearbeiten"
+  },
+  "comingSoon": "Bald verfügbar!"
+}

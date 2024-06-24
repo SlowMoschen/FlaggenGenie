@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { arrow, cardsIcon, closeCross, decksIcon, doneCheck, emptyIcon } from "../../../assets";
+import Button from "../../../shared/components/Button";
+import { useIndexCardsLogic } from "../useIndexCardLogic";
+import { Decks } from "../types";
 import Card from "./Card";
-import Button from "./Button";
-import { DeckIndex, Decks } from "../types";
-import { useAppContext } from "../Context";
-import { arrow, cardsIcon, closeCross, decksIcon, doneCheck, emptyIcon } from "../assets/index";
 
 interface DeckProps {
   decks: typeof Decks.prototype;
@@ -12,6 +12,7 @@ interface DeckProps {
 interface CardControlsProps {
   handleCorrect: () => void;
   handleIncorrect: () => void;
+  disabled?: boolean;
 }
 
 interface DeckControlsProps {
@@ -32,7 +33,7 @@ function DeckControls({
       <div className="flex justify-evenly my-3 w-full">
         <Button
           onClick={handlePreviousDeck}
-          buttonSize="icon"
+          buttonSize="xsmall"
           variant="secondary"
           disabled={currentDeckIndex === 0}
         >
@@ -40,7 +41,7 @@ function DeckControls({
         </Button>
         <Button
           onClick={handleNextDeck}
-          buttonSize="icon"
+          buttonSize="xsmall"
           variant="secondary"
           disabled={currentDeckIndex === totalDecks - 1}
         >
@@ -51,13 +52,23 @@ function DeckControls({
   );
 }
 
-function CardControls({ handleCorrect, handleIncorrect }: CardControlsProps) {
+function CardControls({ handleCorrect, handleIncorrect, disabled }: CardControlsProps) {
   return (
     <div className="flex justify-evenly my-3 w-full max-w-sm">
-      <Button onClick={handleIncorrect} buttonSize="icon" variant="game-secondary">
+      <Button
+        onClick={handleIncorrect}
+        buttonSize="medium"
+        variant="game-secondary"
+        disabled={disabled}
+      >
         <img src={closeCross} alt="incorrect" className="h-8 w-8" />
       </Button>
-      <Button onClick={handleCorrect} buttonSize="icon" variant="game-primary">
+      <Button
+        onClick={handleCorrect}
+        buttonSize="medium"
+        variant="game-primary"
+        disabled={disabled}
+      >
         <img src={doneCheck} alt="correct" className="h-8 w-8" />
       </Button>
     </div>
@@ -65,76 +76,30 @@ function CardControls({ handleCorrect, handleIncorrect }: CardControlsProps) {
 }
 
 export default function Deck({ decks }: DeckProps) {
-  const { saveUserState } = useAppContext();
-  const [currentDeckIndex, setCurrentDeckIndex] = useState<DeckIndex>(0);
-  const [currentCard, setCurrentCard] = useState(decks.getDeck(currentDeckIndex)?.[0]);
-
-  const isLastDeck = currentDeckIndex === decks.length - 1;
-  const isFirstDeck = currentDeckIndex === 0;
-
-  const handleCorrect = async () => {
-    const removedCard = decks.getDeck(currentDeckIndex)?.shift();
-    if (!removedCard) return;
-
-    if (isLastDeck) {
-      decks.getDeck(currentDeckIndex)?.push(removedCard);
-    } else {
-      decks.getDeck((currentDeckIndex + 1) as DeckIndex)?.push(removedCard);
-    }
-    setCurrentCard(decks.getDeck(currentDeckIndex)?.[0]);
-    saveUserState();
-  };
-
-  const handleIncorrect = async () => {
-    const removedCard = decks.getDeck(currentDeckIndex)?.shift();
-    if (!removedCard) return;
-
-    if (isFirstDeck) {
-      decks.getDeck(currentDeckIndex)?.push(removedCard);
-    } else {
-      decks.getDeck((currentDeckIndex - 1) as DeckIndex)?.push(removedCard);
-    }
-    setCurrentCard(decks.getDeck(currentDeckIndex)?.[0]);
-    saveUserState();
-  };
-
-  const handleNextDeck = () => {
-    if (isLastDeck) return;
-    setCurrentDeckIndex((prev) => (prev + 1) as DeckIndex);
-    saveUserState();
-  };
-
-  const handlePreviousDeck = () => {
-    if (isFirstDeck) return;
-    setCurrentDeckIndex((prev) => (prev - 1) as DeckIndex);
-    saveUserState();
-  };
-
-  useEffect(() => {
-    setCurrentCard(decks.getDeck(currentDeckIndex)?.[0]);
-  }, [currentDeckIndex, decks]);
+  const { t } = useTranslation("indexCards");
+  const { handleCorrect, handleIncorrect, handleNextDeck, handlePreviousDeck, currentCard, deckIndex } = useIndexCardsLogic(decks);
 
   return (
     <div className="h-full w-full relative flex flex-col items-center justify-center p-2 py-10">
       <div className="flex items-center justify-center w-full max-w-sm gap-5">
         <div className="flex items-center justify-center mb-3 font-semibold">
           <img src={cardsIcon} alt="cards" className="h-8 w-8 inline-block mr-2" />
-          Decks {currentDeckIndex + 1} / {decks.length}
+          Decks {deckIndex + 1} / {decks.length}
         </div>
         <div className="flex items-center justify-center mb-3 font-semibold">
           <img src={decksIcon} alt="decks" className="h-8 w-8 inline-block mr-2" />
-          {decks.getDeck(currentDeckIndex)?.length} Karten
+          {decks.getDeck(deckIndex)?.length} {t("cards")}
         </div>
       </div>
       <DeckControls
         handleNextDeck={handleNextDeck}
         handlePreviousDeck={handlePreviousDeck}
-        currentDeckIndex={currentDeckIndex}
+        currentDeckIndex={deckIndex}
         totalDecks={decks.length}
       />
       <div className="card-container relative h-full w-full max-w-sm bg-slate-300">
         {currentCard ? (
-          <Card card={currentCard} />
+          <Card card={currentCard} onRightSwipe={handleCorrect} onLeftSwipe={handleIncorrect} />
         ) : (
           <div className="flex flex-col justify-center items-center gap-10 h-full w-full bg-red-200 rounded shadow-md text-xl text-center ">
             <img src={emptyIcon} alt="empty" className="h-28 w-28" />
@@ -142,7 +107,11 @@ export default function Deck({ decks }: DeckProps) {
           </div>
         )}
       </div>
-      <CardControls handleCorrect={handleCorrect} handleIncorrect={handleIncorrect} />
+      <CardControls
+        handleCorrect={handleCorrect}
+        handleIncorrect={handleIncorrect}
+        disabled={decks.getDeck(deckIndex)?.length === 0}
+      />
     </div>
   );
 }
