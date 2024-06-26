@@ -88,7 +88,7 @@ const Card = forwardRef<HTMLDivElement, ICardProps>(({ card, onRightSwipe, onLef
         className="swiper"
         ref={ref}
         onTouchEndCapture={(e) => handleSwipe(e)}
-        onTouchStart={handleTouchStart}
+        onTouchStart={(e) => handleTouchStart(e)}
         onClick={(e) => handleClick(e)}
       >
         <div className="card" ref={cardRef}>
