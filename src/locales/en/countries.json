@@ -1,4 +1,6 @@
 {
+  "capital": "Capital City",
+  "region": "Region",
   "ad": {
     "name": "Andorra",
     "currency": "EUR",

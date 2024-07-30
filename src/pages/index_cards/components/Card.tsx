@@ -95,7 +95,19 @@ const Card = forwardRef<HTMLDivElement, ICardProps>(({ card, onRightSwipe, onLef
           <div className="front">
             <img src={frontDisplay} alt="front" draggable={false} />
           </div>
-          <div className="back">{t(`${backDisplay}.name`)}</div>
+          <div className="back">
+            <h1 className="text-4xl font-bold">{t(`${backDisplay}.name`)}</h1>
+            <div className="flex flex-col text-2xl my-4 bg-background-800 rounded p-4 w-full">
+              <div className="flex flex-col justify-between my-2">
+                <p className="underline font-semibold">{t("capital")}:</p>
+                <p>{t(`${backDisplay}.capital`)}</p>
+              </div>
+              <div className="flex flex-col justify-between my-2">
+                <p className="underline font-semibold">{t("region")}:</p>
+                <p>{t(`${backDisplay}.region`)}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

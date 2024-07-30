@@ -1,4 +1,6 @@
 {
+  "capital": "Hauptstadt",
+  "region": "Region",
   "ad": {
     "name": "Andorra",
     "currency": "EUR",
@@ -1320,7 +1322,7 @@
     "region": "Ozeanien"
   },
   "tl": {
-    "name": "Timor-Leste",
+    "name": "Osttimor",
     "currency": "USD",
     "capital": "Dili",
     "region": "Asien"

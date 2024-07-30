@@ -74,7 +74,7 @@ body {
 
   .card .front,
   .card .back {
-    @apply absolute w-full h-full flex items-center justify-center rounded p-4;
+    @apply absolute w-full h-full rounded p-4;
     backface-visibility: hidden;
   }
 
@@ -87,7 +87,7 @@ body {
   }
 
   .back {
-    @apply bg-primary-600 text-4xl text-center;
+    @apply bg-primary-600 text-center flex flex-col items-center justify-center;
     transform: rotateY(180deg);
   }
 
